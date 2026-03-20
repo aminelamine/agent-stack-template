@@ -1,0 +1,26 @@
+# Env & secrets
+.env
+.env.local
+.env.*.local
+
+# MCP config avec token réel — ne jamais commiter
+# Commite le fichier uniquement avec le placeholder "VOTRE_TOKEN_FIGMA_ICI"
+# .mcp.json  ← décommente si tu veux ignorer complètement
+
+# Node
+node_modules/
+.npm
+
+# Next.js (si utilisé dans le projet final)
+.next/
+out/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp

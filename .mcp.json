@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "figma-console": {
+      "command": "node",
+      "args": ["./node_modules/figma-console-mcp/dist/local.js"],
+      "env": {
+        "FIGMA_ACCESS_TOKEN": "VOTRE_TOKEN_FIGMA_ICI",
+        "ENABLE_MCP_APPS": "true"
+      }
+    }
+  }
+}
