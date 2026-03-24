@@ -1,6 +1,6 @@
 # CLAUDE.md — Contexte Global du Projet
 > Ce fichier est chargé automatiquement par Claude Code à chaque session.
-> Il bootstrappe le système multi-agents RAY / BOB / ANALYZER.
+> Il bootstrappe le système multi-agents JO / BOB / DO.
 
 ---
 
@@ -25,9 +25,9 @@ Lis ces fichiers en priorité au début de chaque session :
 
 | Fichier | Contenu | Lu par |
 |---|---|---|
-| `agent-system/context/client_vision.md` | Vision client, JTBD, contraintes | RAY, ANALYZER |
-| `agent-system/context/roadmap.md` | Features, KPIs, backlog, out-of-scope | RAY, BOB |
-| `agent-system/context/design_guide.md` | Tokens UI, composants autorisés, anti-patterns | BOB, ANALYZER |
+| `agent-system/context/client_vision.md` | Vision client, JTBD, contraintes | JO, DO |
+| `agent-system/context/roadmap.md` | Features, KPIs, backlog, out-of-scope | JO, BOB |
+| `agent-system/context/design_guide.md` | Tokens UI, composants autorisés, anti-patterns | BOB, DO |
 
 ---
 
@@ -37,18 +37,18 @@ Utilise les slash commands pour activer chaque agent :
 
 | Command | Agent | Phase | Action |
 |---|---|---|---|
-| `/ray` | RAY — Architecte & Strategist | PLAN | Challenge une idée, génère une spec |
-| `/design-workflow` | Bridge DS — Designer Figma | DESIGN | Génère un frame Figma depuis une spec RAY |
+| `/jo` | JO — Architecte & Strategist | PLAN | Challenge une idée, génère une spec |
+| `/design-workflow` | Bridge DS — Designer Figma | DESIGN | Génère un frame Figma depuis une spec JO |
 | `/bob` | BOB — Builder & UI/UX | SHIP | Implémente une spec en code |
-| `/analyze` | ANALYZER — Product QA & CX | ANALYZE | Évalue le code livré, rend un verdict /20 |
+| `/do` | DO — Product QA & CX | ANALYZE | Évalue le code livré, rend un verdict /20 |
 
 ---
 
 ## 🔄 Workflow complet
 
 ```
-1. /ray              → "j'ai une idée : [description]"
-                      → RAY challenge + génère specs/feature_[ID].md
+1. /jo               → "j'ai une idée : [description]"
+                      → JO challenge + génère specs/feature_[ID].md
 
 2. /design-workflow  → "spec feature_[ID]"
                       → Bridge DS lit la spec + génère le frame Figma
@@ -57,8 +57,8 @@ Utilise les slash commands pour activer chaque agent :
 3. /bob              → "implémente feature_[ID]"
                       → BOB lit la spec + design_guide + frame Figma si existant
 
-4. /analyze          → "évalue feature_[ID]"
-                      → ANALYZER score /20 + verdict + feedbacks
+4. /do               → "évalue feature_[ID]"
+                      → DO score /20 + verdict + feedbacks
 ```
 
 ---
