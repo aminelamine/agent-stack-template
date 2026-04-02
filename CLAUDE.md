@@ -28,6 +28,7 @@ Lis ces fichiers en priorité au début de chaque session :
 | `agent-system/context/client_vision.md` | Vision client, JTBD, contraintes | JO, DO |
 | `agent-system/context/roadmap.md` | Features, KPIs, backlog, out-of-scope | JO, BOB |
 | `agent-system/context/design_guide.md` | Tokens UI, composants autorisés, anti-patterns | BOB, DO |
+| `agent-system/adr/ADR_INDEX.md` | Décisions d'architecture actives | JO, BOB, DO |
 
 ---
 
@@ -66,7 +67,10 @@ Utilise les slash commands pour activer chaque agent :
 ## 🚫 Règles invariantes
 
 - Ne jamais coder sans spec validée (`statut: VALIDÉE TALENT` dans la spec)
-- Ne jamais modifier les fichiers dans `/components/ui/` (Shadcn — ownership total)
+- Ne jamais modifier les fichiers UI ownership (ex: `/components/ui/`) sans validation
 - Ne jamais introduire une librairie UI non listée dans `design_guide.md` sans validation
 - TypeScript strict : zéro `any`, zéro `@ts-ignore`
 - Chaque composant fait < 150 lignes — découper si dépassement
+- Consulter `agent-system/adr/ADR_INDEX.md` avant toute décision d'architecture ou de dépendance
+
+> Pour les contraintes de sprint, les versions d'outils et les limites d'autonomie détaillées → voir `AGENTS.md`

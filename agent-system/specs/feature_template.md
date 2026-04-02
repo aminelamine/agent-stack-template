@@ -1,5 +1,5 @@
 # Feature Spec — [FEATURE_ID] : [Nom de la Feature]
-> **Généré par** : RAY
+> **Généré par** : JO
 > **Statut** : `[ ] DRAFT  [ ] VALIDÉE TALENT  [ ] EN DEV  [ ] EN REVIEW  [ ] LIVRÉE`
 > **Dernière mise à jour** : `[YYYY-MM-DD]`
 > **Lien Roadmap** : `roadmap.md#[ID]`
@@ -12,7 +12,7 @@
 > En 2-3 phrases : quel est le problème utilisateur concret que cette feature adresse ?
 > Ne pas décrire la solution ici — uniquement le problème.
 
-`[À COMPLÉTER PAR RAY]`
+`[À COMPLÉTER PAR JO]`
 
 ### JTBD ciblé
 > Extraire depuis `context/client_vision.md`
@@ -75,14 +75,15 @@ THEN [comportement de gestion d'erreur attendu]
 
 ---
 
-## ✅ Critères d'Acceptation Binaires
+## ✅ Critères d'Acceptation — Validés INVEST
 
-> Chaque critère est VRAI ou FAUX. Pas de "devrait", "généralement", "si possible".
-> ANALYZER coche cette liste pour rendre son verdict.
+> Chaque critère a passé le gate INVEST de JO : Independent · Negotiable · Valuable · Estimable · Small · Testable.
+> Chaque critère est BINAIRE (VRAI ou FAUX). Jamais "devrait", "généralement", "si possible".
+> DO coche cette liste pour rendre son verdict.
 
 ### Fonctionnels
 - [ ] `[Critère 1 — ex. : "L'utilisateur peut soumettre le formulaire avec les champs requis remplis"]`
-- [ ] `[Critère 2 — ex. : "Un toast de succès s'affiche dans les 2 secondes après soumission"]`
+- [ ] `[Critère 2 — ex. : "Un toast de succès s'affiche dans les 2 secondes après soumission réussie"]`
 - [ ] `[Critère 3]`
 - [ ] `[Critère 4]`
 
@@ -173,9 +174,9 @@ async function [actionName](params: [Type]): Promise<[ReturnType]> {
 
 ---
 
-## 🔍 Notes pour ANALYZER
+## 🔍 Notes pour DO
 
-> Ce que ANALYZER doit vérifier en priorité pour cette feature.
+> Ce que DO doit vérifier en priorité pour cette feature.
 
 - `[Point d'attention UX 1 — ex. : "Vérifier que l'empty state est suffisamment informatif"]`
 - `[Point d'attention 2 — ex. : "Simuler le flow complet avec un utilisateur qui n'a jamais utilisé le produit"]`
@@ -186,5 +187,5 @@ async function [actionName](params: [Type]): Promise<[ReturnType]> {
 
 | Date | Version | Changement | Par |
 |---|---|---|---|
-| `[YYYY-MM-DD]` | `v0.1` | Création initiale | RAY |
-| `[YYYY-MM-DD]` | `v0.2` | `[Description du changement]` | `[RAY / Le Talent]` |
+| `[YYYY-MM-DD]` | `v0.1` | Création initiale | JO |
+| `[YYYY-MM-DD]` | `v0.2` | `[Description du changement]` | `[JO / Le Talent]` |

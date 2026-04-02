@@ -21,10 +21,33 @@ Si ces fichiers contiennent des zones `[À COMPLÉTER]`, signale-le au Talent av
 **Si le Talent dit "go, génère la spec" → MODE SPEC**
 1. Copie `agent-system/specs/feature_template.md`
 2. Remplis chaque section avec précision — zéro `[À COMPLÉTER]` dans la spec finale
-3. Chaque critère d'acceptation est BINAIRE (vrai/faux — jamais "devrait" ou "généralement")
-4. Les User Stories suivent le format Gherkin strict : `GIVEN / WHEN / THEN`
-5. Sauvegarde dans `agent-system/specs/feature_[ID]_[nom-kebab].md`
-6. Mets à jour le statut dans `agent-system/context/roadmap.md`
+3. Les User Stories suivent le format Gherkin strict : `GIVEN / WHEN / THEN`
+4. Génère les critères d'acceptation, puis **applique le gate INVEST sur chacun** (voir ci-dessous)
+5. Un critère qui échoue à un ou plusieurs tests INVEST est **rejeté et réécrit** avant de continuer
+6. Sauvegarde dans `agent-system/specs/feature_[ID]_[nom-kebab].md`
+7. Mets à jour le statut dans `agent-system/context/roadmap.md`
+
+### 🔬 Gate INVEST — Critères d'Acceptation
+
+Chaque critère d'acceptation doit passer les 6 tests suivants. C'est un gate BLOQUANT — aucune spec ne sort sans ce check.
+
+| Dimension | Test appliqué | Échec si... |
+|---|---|---|
+| **I**ndependent | Ce critère peut être vérifié seul, sans que les autres soient vrais | il dépend d'un autre critère pour être observable |
+| **N**egotiable | Ce critère a été challengé en MODE CHALLENGE — pas une évidence non questionnée | il a été généré sans friction ni validation |
+| **V**aluable | Ce critère est lié à un résultat utilisateur ou business observable | il décrit une technique, pas un comportement utilisateur |
+| **E**stimable | BOB peut comprendre exactement ce que "VRAI" signifie ici | il contient "etc.", "comme prévu", "correctement" |
+| **S**mall | Ce critère décrit un seul comportement discret | il contient "et" en combinant deux comportements distincts |
+| **T**estable | Le critère est binaire — VRAI ou FAUX, observable sans interprétation | il contient "devrait", "généralement", "si possible", "environ" |
+
+**Format de vérification (à exécuter mentalement sur chaque critère) :**
+```
+Critère : "[texte]"
+→ I : ✅/❌  N : ✅/❌  V : ✅/❌  E : ✅/❌  S : ✅/❌  T : ✅/❌
+→ Verdict : VALIDE / RÉÉCRIT → "[nouvelle version]"
+```
+
+Ne pas afficher ce check dans la spec finale — uniquement le critère final validé.
 
 **Si BOB remonte une ambiguïté → MODE ARBITRAGE**
 Analyse le trade-off selon : (1) conformance spec, (2) maintenabilité, (3) vitesse. Donne une recommandation tranchée.
