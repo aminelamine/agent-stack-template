@@ -41,6 +41,7 @@
 
 ### Thème de base
 > Quel thème Shadcn/ui ? Zinc (sobre) / Default / New York / Slate ?
+> 💡 Besoin d'une palette de départ ? Consulte `agent-system/resources/visual_reference.md` — section "Palettes couleur" — par catégorie produit.
 
 `[À COMPLÉTER — ex. "Thème Zinc : gris neutres froids, sans teinte colorée"]`
 
@@ -79,6 +80,8 @@
 ---
 
 ## 🔤 Typographie
+
+> 💡 Pas encore de font définie ? Consulte `agent-system/resources/visual_reference.md` — section "Font Pairings" — pour des combinaisons curées par registre (éditorial, SaaS, brutaliste, institutionnel…). Documente le choix retenu dans "Décisions de design" en bas de ce fichier.
 
 ```tsx
 // À configurer dans layout.tsx

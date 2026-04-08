@@ -28,6 +28,7 @@ Lis ces fichiers en priorité au début de chaque session :
 | `agent-system/context/client_vision.md` | Vision client, JTBD, contraintes | JO, DO |
 | `agent-system/context/roadmap.md` | Features, KPIs, backlog, out-of-scope | JO, BOB |
 | `agent-system/context/design_guide.md` | Tokens UI, composants autorisés, anti-patterns | BOB, DO |
+| `agent-system/resources/visual_reference.md` | Palettes, font pairings, styles UI — référence projet-agnostique | BOB |
 | `agent-system/adr/ADR_INDEX.md` | Décisions d'architecture actives | JO, BOB, DO |
 
 ---
@@ -51,16 +52,22 @@ Utilise les slash commands pour activer chaque agent :
 1. /jo               → "j'ai une idée : [description]"
                       → JO challenge + génère specs/feature_[ID].md
 
-2. /design-workflow  → "spec feature_[ID]"
+2. /design-workflow  → "spec feature_[ID]"          ← optionnel, recommandé pour features visuelles
                       → Bridge DS lit la spec + génère le frame Figma
-                      → (optionnel — recommandé pour features visuellement complexes)
 
 3. /bob              → "implémente feature_[ID]"
-                      → BOB lit la spec + design_guide + frame Figma si existant
+                      → BOB lit la spec + design_guide + frame Figma (si existant)
+                      → BOB génère un Brief Esthétique (.claude/skills/frontend-design)
+                         ↳ Direction · Typo · Palette · Tension · Composition
+                         ↳ Talent valide en 1 ligne → BOB code
+                      → Ralph Loop : Structure → Scaffold → Core Logic → UI → États → Polish
 
 4. /do               → "évalue feature_[ID]"
                       → DO score /20 + verdict + feedbacks
 ```
+
+> 💡 **Le Brief Esthétique est automatique** — BOB le génère sans que tu aies à le demander.
+> Tu lis 5 lignes, tu dis "ok" ou tu ajustes. Ça prend 30 secondes et évite un rework.
 
 ---
 
@@ -74,3 +81,33 @@ Utilise les slash commands pour activer chaque agent :
 - Consulter `agent-system/adr/ADR_INDEX.md` avant toute décision d'architecture ou de dépendance
 
 > Pour les contraintes de sprint, les versions d'outils et les limites d'autonomie détaillées → voir `AGENTS.md`
+
+---
+
+## 🎨 Esthétique frontend (règle BOB)
+
+<frontend_aesthetics>
+You tend to converge toward generic, "on distribution" outputs. In frontend design, this creates what users call the "AI slop" aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight. Focus on:
+
+Typography: Choose fonts that are beautiful, unique, and interesting. Avoid generic fonts like Arial and Inter; opt instead for distinctive choices that elevate the frontend's aesthetics. Consult `agent-system/resources/visual_reference.md` for curated non-generic pairings.
+
+Color & Theme: Commit to a cohesive aesthetic. Use CSS variables for consistency. Dominant colors with sharp accents outperform timid, evenly-distributed palettes. Draw from IDE themes and cultural aesthetics for inspiration.
+
+Motion: Use animations for effects and micro-interactions. Prioritize CSS-only solutions for HTML. Use Motion library for React when available. Focus on high-impact moments: one well-orchestrated page load with staggered reveals (animation-delay) creates more delight than scattered micro-interactions.
+
+Backgrounds: Create atmosphere and depth rather than defaulting to solid colors. Layer CSS gradients, use geometric patterns, or add contextual effects that match the overall aesthetic.
+
+Avoid generic AI-generated aesthetics:
+- Overused font families (Inter, Roboto, Arial, system fonts)
+- Clichéd color schemes (particularly purple gradients on white backgrounds)
+- Predictable layouts and component patterns
+- Cookie-cutter design that lacks context-specific character
+
+Interpret creatively and make unexpected choices that feel genuinely designed for the context. Vary between light and dark themes, different fonts, different aesthetics. You still tend to converge on common choices (Space Grotesk, for example) across generations. Avoid this: it is critical that you think outside the box!
+
+Bold Aesthetic Direction: Before writing any CSS, commit to a specific, memorable direction. "Dark CLI terminal, honnête et technique" or "typographie-driven éditorial, chaud comme du papier" beats "clean and modern". This direction must be visible in every line of code you write. See `.claude/skills/frontend-design/SKILL.md` for the full protocol.
+
+Implementation Complexity: Match the complexity of your code to the vision. A maximalist layout warrants elaborate layering — CSS gradients, overlapping elements, staggered animations. A typographic-only design demands precision in spacing and weight contrasts, nothing more. Elegance comes from executing the vision well, not accumulating effects.
+
+Spatial Composition: Actively avoid "template" layouts. Favor unconventional spatial choices: asymmetric grids, overlapping cards, bento layouts with varied proportions, full-bleed sections with sharp cuts, scroll-triggered staggered reveals. The layout itself should communicate design intent.
+</frontend_aesthetics>
