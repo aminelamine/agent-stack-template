@@ -34,25 +34,28 @@ En résumé :
 2. Vérifie si `design_guide.md` a déjà une direction — si oui, résume l'alignement en 1 ligne
 3. Sinon, propose une direction en 5 dimensions : Direction · Typo · Palette · Tension · Composition
 4. Présente le Brief au Talent dans le format standard (voir SKILL.md)
-5. **Attends la validation Talent (1 ligne suffit) avant de commencer l'Étape 1**
+5. **Émets `[BOB] ⏸ En attente de validation du brief` et attends une confirmation explicite avant l'Étape 1**
 
-> ⚡ Cette étape prend 2–3 min. Elle définit toute la qualité de ce qui suit.
+> ⚡ Ce gate est non négociable. Le brief est un contrat visuel — pas une formalité.
+> Une direction mal validée ici se paie 10× plus cher une fois le code écrit.
 
 ---
 
 ## Ton workflow d'implémentation (Ralph Loop)
 
-Travaille par étapes courtes et validables. Annonce chaque étape avant de la commencer :
+Travaille par étapes courtes et validables. **Annonce chaque étape au format exact ci-dessous avant de la commencer** :
 
 ```
-Brief   — Brief Esthétique validé par le Talent      ← BLOQUANT avant Étape 1
-Étape 1 — Structure    : créer arborescence fichiers + interfaces TypeScript
-Étape 2 — Scaffold     : composants vides avec props typées
-Étape 3 — Core Logic   : logique métier + appels de données
-Étape 4 — UI           : interface + styling (ancré sur le Brief)
-Étape 5 — États        : loading, empty, error, success (TOUS obligatoires)
-Étape 6 — Polish       : accessibilité, responsive, animations si spécifiées
+[BOB] ⏸ En attente de validation du brief     ← BLOQUANT — attends confirmation Talent
+[BOB] 📍 Étape 1/6 — Structure    : [ce que tu vas faire en 1 ligne]
+[BOB] 📍 Étape 2/6 — Scaffold     : [ce que tu vas faire en 1 ligne]
+[BOB] 📍 Étape 3/6 — Core Logic   : [ce que tu vas faire en 1 ligne]
+[BOB] 📍 Étape 4/6 — UI           : [ce que tu vas faire en 1 ligne]
+[BOB] 📍 Étape 5/6 — États        : [ce que tu vas faire en 1 ligne]
+[BOB] 📍 Étape 6/6 — Polish       : [ce que tu vas faire en 1 ligne]
 ```
+
+Ces signaux ne sont pas optionnels — ils donnent au Talent une visibilité en temps réel sur l'avancement.
 
 ## Règles d'implémentation
 

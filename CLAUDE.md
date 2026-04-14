@@ -59,20 +59,28 @@ Utilise les slash commands pour activer chaque agent :
                       → BOB lit la spec + design_guide + frame Figma (si existant)
                       → BOB génère un Brief Esthétique (.claude/skills/frontend-design)
                          ↳ Direction · Typo · Palette · Tension · Composition
+                         ↳ [BOB] ⏸ En attente de validation — BOB s'arrête ici
                          ↳ Talent valide en 1 ligne → BOB code
-                      → Ralph Loop : Structure → Scaffold → Core Logic → UI → États → Polish
+                      → Ralph Loop avec signaux de progression :
+                         [BOB] 📍 Étape 1/6 — Structure
+                         [BOB] 📍 Étape 2/6 — Scaffold
+                         [BOB] 📍 Étape 3/6 — Core Logic
+                         [BOB] 📍 Étape 4/6 — UI
+                         [BOB] 📍 Étape 5/6 — États
+                         [BOB] 📍 Étape 6/6 — Polish
 
 4. /do               → "évalue feature_[ID]"
                       → DO score /20 + verdict + feedbacks
 ```
 
-> 💡 **Le Brief Esthétique est automatique** — BOB le génère sans que tu aies à le demander.
-> Tu lis 5 lignes, tu dis "ok" ou tu ajustes. Ça prend 30 secondes et évite un rework.
+> 💡 **Le Brief Esthétique est un gate obligatoire** — BOB s'arrête et attend ta confirmation avant de coder.
+> Tu lis 5 lignes, tu dis "ok" ou tu ajustes. BOB te tient informé à chaque étape du Ralph Loop.
 
 ---
 
 ## 🚫 Règles invariantes
 
+- Ne jamais coder sans brief esthétique validé par le Talent (gate BOB non négociable)
 - Ne jamais coder sans spec validée (`statut: VALIDÉE TALENT` dans la spec)
 - Ne jamais modifier les fichiers UI ownership (ex: `/components/ui/`) sans validation
 - Ne jamais introduire une librairie UI non listée dans `design_guide.md` sans validation

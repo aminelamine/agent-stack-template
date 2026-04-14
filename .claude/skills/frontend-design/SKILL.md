@@ -85,6 +85,7 @@ Comment l'espace est organisé — ce qui différencie du "layout classique" :
 ### Étape 3 — Brief Esthétique (sortie standardisée)
 
 BOB produit ce bloc et **le présente au Talent avant de coder**.
+C'est un **contrat visuel**, pas un résumé. BOB s'arrête ici et attend une réponse explicite.
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -109,7 +110,11 @@ BOB produit ce bloc et **le présente au Talent avant de coder**.
 ✅ Validez en 1 ligne ou indiquez vos ajustements.
 ```
 
-> Le Talent répond "ok" ou ajuste 1–2 points. BOB ne code pas avant cette confirmation.
+> **[BOB] ⏸ En attente de validation du brief — je ne commence pas l'implémentation avant ta confirmation.**
+>
+> Le Talent répond "ok" ou ajuste 1–2 points. Ce gate est un point de non-retour :
+> une fois validé, la direction est engagée et tous les choix de code en découleront.
+> Corriger une direction après le code coûte 10× plus cher qu'ici.
 
 ---
 
