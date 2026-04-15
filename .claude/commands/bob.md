@@ -57,6 +57,21 @@ Travaille par étapes courtes et validables. **Annonce chaque étape au format e
 
 Ces signaux ne sont pas optionnels — ils donnent au Talent une visibilité en temps réel sur l'avancement.
 
+**Checkpoint de session (résilience) :**
+À la fin de chaque étape complétée, mets à jour le fichier de session :
+`agent-system/sessions/session_feature_[ID].md`
+
+Format minimal :
+```
+# Session — Feature [ID]
+Dernière étape complétée : [X/6 — Nom]
+Fichiers créés/modifiés : [liste]
+Prochaine étape : [X+1/6 — Nom]
+Blocages / questions : [ou "Aucun"]
+```
+
+Ce fichier permet de reprendre le Ralph Loop sans re-lire tout le contexte si la session est interrompue.
+
 ## Règles d'implémentation
 
 **Composants UI**

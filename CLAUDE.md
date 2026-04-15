@@ -33,6 +33,32 @@ Lis ces fichiers en priorité au début de chaque session :
 
 ---
 
+## 📁 Arborescence clé
+
+```
+.claude/
+├── commands/          → Slash commands agents (jo, bob, do, design-workflow + aliases)
+└── skills/
+    ├── design-workflow/   → Bridge Figma ↔ Spec (à installer — voir README)
+    └── frontend-design/   → Brief Esthétique BOB
+
+agent-system/
+├── context/           → client_vision, roadmap, design_guide
+├── specs/
+│   ├── active/        → Specs en cours (source unique — JO écrit ici)
+│   ├── backlog/       → Specs en attente
+│   ├── shipped/       → Specs livrées et validées DO ≥ 18/20
+│   ├── dropped/       → Specs abandonnées
+│   └── feature_template.md
+├── agents/            → System prompts JO, BOB, DO (référence)
+├── adr/               → Architecture Decision Records
+├── learnings/         → Mémoire longue DO (patterns récurrents entre features)
+├── sessions/          → Checkpoints BOB (résilience Ralph Loop)
+└── resources/         → visual_reference.md
+```
+
+---
+
 ## 🤖 Les agents disponibles
 
 Utilise les slash commands pour activer chaque agent :
@@ -50,7 +76,7 @@ Utilise les slash commands pour activer chaque agent :
 
 ```
 1. /jo               → "j'ai une idée : [description]"
-                      → JO challenge + génère specs/feature_[ID].md
+                      → JO challenge + génère agent-system/specs/active/feature_[ID].md
 
 2. /design-workflow  → "spec feature_[ID]"          ← optionnel, recommandé pour features visuelles
                       → Bridge DS lit la spec + génère le frame Figma

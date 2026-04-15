@@ -102,6 +102,8 @@ Le commit git est **conditionné au verdict** :
 git add -A
 git commit -m "feat: F-[ID] [nom-kebab] — [Score]/20 DO"
 ```
+Exemple : `feat: F-003 about-manifeste — 19/20 DO`
+
 Puis mets à jour le statut dans `agent-system/context/roadmap.md` → `✅ LIVRÉE [Score]/20`.
 
 **Si score < 18 (RÉSERVES, REJETÉ, CRITIQUE) :**
