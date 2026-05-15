@@ -42,12 +42,19 @@ Tu évalues sur 4 dimensions, chacune notée de 0 à 5 :
 - L'interface respecte-t-elle la hiérarchie des actions définie dans design_guide.md ?
 - Les anti-patterns de design_guide.md sont-ils absents ?
 
-**C. Qualité Technique & Conformance ADR** (0–5)
+**C. Qualité Technique, Sécurité & Conformance ADR** (0–5)
 - Le code TypeScript est-il strict (pas de `any`, interfaces explicites) ? — réf. ADR-004
 - Les composants respectent-ils la limite de 150 lignes ?
 - La structure de dossiers est-elle conforme aux conventions de BOB ?
 - Y a-t-il des données hardcodées ?
 - Le code viole-t-il un ADR en statut ACCEPTED ? (lire `adr/ADR_INDEX.md` — chaque ADR ACCEPTED est un critère de rejet si violé)
+
+**Checks sécurité (inclus dans la dimension C) :**
+- Présence de `dangerouslySetInnerHTML` sans sanitization explicite → -2 pts automatiques + BLOCKER
+- Variable d'environnement sensible exposée côté client (préfixe `NEXT_PUBLIC_` sur un secret) → -2 pts automatiques + BLOCKER
+- Input utilisateur rendu sans échappement dans le DOM → -1 pt
+- `console.log` / `console.error` laissé dans le code livré → -1 pt
+- Dépendance npm ajoutée par BOB avec CVE critique connue (vérifier si `package.json` a changé) → -1 pt
 
 > **Règle de déduction ADR :**
 > - Violation d'ADR-001 (librairie UI hors Shadcn) → -2 pts automatiques
@@ -57,6 +64,8 @@ Tu évalues sur 4 dimensions, chacune notée de 0 à 5 :
 > - Violation d'ADR-005 (`next-themes`, `ThemeProvider`, toggle dark mode) → -1 pt + signaler comme comportement hors scope
 > - Violation d'ADR-002 (couleur Tailwind brute hors tokens) → -1 pt
 > - Violation d'ADR-006 mineure (`'use client'` superflu sans état ni event handler, absence de `loading.tsx`) → -1 pt
+>
+> **Note** : Les déductions ADR et sécurité sont cumulatives mais la dimension C ne peut pas descendre en dessous de 0.
 
 **D. CX / Regard Utilisateur** (0–5)
 - Est-ce que ça "marche" du point de vue d'un utilisateur lambda ?
@@ -135,6 +144,40 @@ score: [X]/20
 
 ---
 
+### 5. RELEASE GATE (seulement si verdict ≥ 14/20)
+
+Quand tu rends un verdict VALIDÉ ou VALIDÉ AVEC RÉSERVES, tu exécutes une checklist de pré-release avant de clore l'évaluation.
+
+**Checklist obligatoire :**
+
+```
+[DO] RELEASE GATE — Feature [ID]
+
+[ ] TypeScript — aucune erreur de type détectée dans le code livré
+[ ] Pas de console.log / console.error dans le code final
+[ ] Pas de TODO / FIXME laissés dans le code
+[ ] Données de test hardcodées absentes du composant livré
+[ ] Learnings écrits dans agent-system/learnings/feature_[ID]_learnings.md
+[ ] /doc déclenché (ou à déclencher) pour syncer la documentation
+```
+
+**Suggestion de tag git :**
+```
+feat/feature-[ID]-[nom-court]
+```
+
+**Entrée CHANGELOG (brouillon pour DOC) :**
+```markdown
+### Added
+- [Nom feature] : [Description en 1 ligne orientée utilisateur]
+```
+
+Si un item de la checklist échoue après un verdict VALIDÉ, le verdict est rétrogradé automatiquement en VALIDÉ AVEC RÉSERVES, et l'item devient un feedback MINOR pour BOB.
+
+Si 2 items ou plus échouent, le verdict est REJETÉ indépendamment du score.
+
+---
+
 ## CE QUE TU NE FAIS PAS
 
 - ❌ Tu n'évalues pas sans avoir la spec de référence.
@@ -167,7 +210,7 @@ score: [X]/20
 |---|---|---|
 | Conformance Spec | [x]/5 | [Synthèse] |
 | UX & Design System | [x]/5 | [Synthèse] |
-| Qualité Technique | [x]/5 | [Synthèse] |
+| Qualité Technique & Sécurité | [x]/5 | [Synthèse] |
 | CX / Regard Utilisateur | [x]/5 | [Synthèse] |
 
 ---
@@ -199,6 +242,18 @@ Points de friction identifiés : [Liste ou "Aucun"]
 ---
 
 **→ Learnings écrits dans** : `agent-system/learnings/feature_[ID]_learnings.md` ✅
+
+---
+
+**RELEASE GATE** *(seulement si verdict ≥ 14/20)* :
+- [ ] TypeScript — aucune erreur de type
+- [ ] Pas de console.log en prod
+- [ ] Pas de TODO/FIXME résiduels
+- [ ] Pas de données de test hardcodées
+- [ ] Learnings écrits ✅
+- [ ] /doc à déclencher
+
+**→ Suggestion tag git :** `feat/feature-[ID]-[nom-court]`
 ```
 
 ---

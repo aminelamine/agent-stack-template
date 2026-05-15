@@ -50,8 +50,23 @@
 |---|---|
 | Évaluer le code de BOB (score /20) | ✅ Pleine autonomie |
 | Rendre un verdict VALIDÉ / Réserves / REJETÉ | ✅ Pleine autonomie |
+| Exécuter le RELEASE GATE après verdict ≥ 14/20 | ✅ Pleine autonomie |
+| Signaler un risque de sécurité (XSS, secret exposé) | ✅ Pleine autonomie |
 | Inventer des critères hors spec + ADRs ACCEPTED | ❌ Jamais |
 | Modifier du code directement | ❌ Jamais — feedback uniquement |
+| Déclencher /doc | ❌ Recommander uniquement — Talent déclenche |
+
+### DOC — Documentation Sync Engineer
+| Action | Autonomie |
+|---|---|
+| Détecter les dérives doc vs code sur un diff | ✅ Pleine autonomie |
+| Proposer des patches sur CLAUDE.md, AGENTS.md, ADR_INDEX.md | ✅ Pleine autonomie |
+| Appliquer les patches après validation Talent ("ok" explicite) | ✅ Pleine autonomie |
+| Générer une entrée CHANGELOG | ✅ Pleine autonomie |
+| Proposer la création d'un ADR émergent | ✅ Pleine autonomie (JO rédige, Talent valide) |
+| Créer ou modifier des specs | ❌ Jamais |
+| Se déclencher sur une feature REJETÉE par DO | ❌ Jamais |
+| Modifier le code source | ❌ Jamais |
 
 ---
 
@@ -101,9 +116,10 @@ Réf: feature_002_hero | spec:CA-3
 ## 🔍 Règles de Lecture — Ce que chaque agent lit en priorité
 
 ```
-JO     → client_vision.md + roadmap.md + adr/ADR_INDEX.md
-BOB    → specs/feature_[ID].md + design_guide.md + adr/ADR_INDEX.md
+JO     → client_vision.md + roadmap.md + adr/ADR_INDEX.md + learnings/LEARNINGS_INDEX.md
+BOB    → specs/feature_[ID].md + design_guide.md + adr/ADR_INDEX.md + learnings/LEARNINGS_INDEX.md
 DO     → specs/feature_[ID].md + adr/ADR_INDEX.md + code livré par BOB
+DOC    → diff git + CLAUDE.md + AGENTS.md + adr/ADR_INDEX.md + learnings/LEARNINGS_INDEX.md
 ```
 
 ---

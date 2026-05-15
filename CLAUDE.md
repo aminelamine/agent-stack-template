@@ -1,6 +1,6 @@
 # CLAUDE.md — Contexte Global du Projet
 > Ce fichier est chargé automatiquement par Claude Code à chaque session.
-> Il bootstrappe le système multi-agents JO / BOB / DO.
+> Il bootstrappe le système multi-agents JO / BOB / DO / DOC.
 
 ---
 
@@ -9,7 +9,7 @@
 **Nom :** `[PROJECT_NAME]`
 **Description courte :** `[1 phrase — ce que le produit fait et pour qui]`
 
-Ce projet suit un workflow multi-agents structuré en 4 phases : **PLAN → DESIGN → SHIP → ANALYZE**.
+Ce projet suit un workflow multi-agents structuré en 5 phases : **PLAN → DESIGN → SHIP → ANALYZE → MAINTAIN**.
 Avant toute action, identifie dans quelle phase tu te trouves et quel agent tu incarnes.
 
 **Stack technique :** `[ex. Next.js · TypeScript strict · Tailwind CSS · Shadcn/ui · Lucide React]`
@@ -50,7 +50,7 @@ agent-system/
 │   ├── shipped/       → Specs livrées et validées DO ≥ 18/20
 │   ├── dropped/       → Specs abandonnées
 │   └── feature_template.md
-├── agents/            → System prompts JO, BOB, DO (référence)
+├── agents/            → System prompts JO, BOB, DO, DOC (référence)
 ├── adr/               → Architecture Decision Records
 ├── learnings/         → Mémoire longue DO (patterns récurrents entre features)
 ├── sessions/          → Checkpoints BOB (résilience Ralph Loop)
@@ -68,7 +68,8 @@ Utilise les slash commands pour activer chaque agent :
 | `/jo` | JO — Architecte & Strategist | PLAN | Challenge une idée, génère une spec |
 | `/design-workflow` | Bridge DS — Designer Figma | DESIGN | Génère un frame Figma depuis une spec JO |
 | `/bob` | BOB — Builder & UI/UX | SHIP | Implémente une spec en code |
-| `/do` | DO — Product QA & CX | ANALYZE | Évalue le code livré, rend un verdict /20 |
+| `/do` | DO — Product QA & CX | ANALYZE | Évalue le code livré, rend un verdict /20 + RELEASE GATE |
+| `/doc` | DOC — Documentation Sync | MAINTAIN | Syncs docs + CHANGELOG après verdict DO ≥ 14/20 |
 
 ---
 
@@ -97,10 +98,20 @@ Utilise les slash commands pour activer chaque agent :
 
 4. /do               → "évalue feature_[ID]"
                       → DO score /20 + verdict + feedbacks
+                      → DO exécute le RELEASE GATE si verdict ≥ 14/20
+                         ↳ Checklist pré-release (TS, no console.log, learnings, etc.)
+                         ↳ Suggestion de tag git + brouillon CHANGELOG
+
+5. /doc              → "doc feature_[ID]"           ← après verdict DO ≥ 14/20
+                      → DOC analyse le diff + détecte les dérives
+                      → DOC propose patches sur CLAUDE.md / AGENTS.md / ADR_INDEX.md
+                      → DOC génère l'entrée CHANGELOG finale
 ```
 
 > 💡 **Le Brief Esthétique est un gate obligatoire** — BOB s'arrête et attend ta confirmation avant de coder.
 > Tu lis 5 lignes, tu dis "ok" ou tu ajustes. BOB te tient informé à chaque étape du Ralph Loop.
+>
+> 💡 **/doc est la dernière étape de chaque cycle** — déclenche-le après chaque verdict DO ≥ 14/20 pour que la documentation ne dérive jamais du code réel.
 
 ---
 
