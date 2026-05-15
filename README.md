@@ -1,7 +1,7 @@
 # agent-stack-template
 
-> Système multi-agents **JO / BOB / DO** pour Claude Code.
-> Workflow **PLAN → DESIGN → SHIP → ANALYZE**, avec système ADR intégré et intégration Figma optionnelle.
+> Système multi-agents **JO / BOB / DO / DOC** pour Claude Code.
+> Workflow **PLAN → DESIGN → SHIP → ANALYZE → MAINTAIN**, avec système ADR intégré et intégration Figma optionnelle.
 
 ---
 
@@ -45,7 +45,8 @@ Ce n'est pas un simple boilerplate. C'est un système d'orchestration d'agents a
 | `/jo` | **JO** — Architecte & Strategist | PLAN | Challenge les idées, génère les specs, crée les ADRs |
 | `/design-workflow` | **Bridge DS** — Designer Figma | DESIGN | Génère des frames Figma depuis une spec JO *(optionnel)* |
 | `/bob` | **BOB** — Builder & UI/UX | SHIP | Implémente les specs en code, commite avec conventions |
-| `/do` | **DO** — Product QA & CX | ANALYZE | Score /20, verdict VALIDÉ/REJETÉ, vérifie la conformance ADR |
+| `/do` | **DO** — Product QA & CX | ANALYZE | Score /20, verdict VALIDÉ/REJETÉ, checks sécurité, RELEASE gate |
+| `/doc` | **DOC** — Documentation Sync | MAINTAIN | Syncs CLAUDE.md/AGENTS.md/ADRs avec le code, génère le CHANGELOG |
 
 ---
 
@@ -62,11 +63,17 @@ Ce n'est pas un simple boilerplate. C'est un système d'orchestration d'agents a
       ↓
 /bob  "implémente feature_[ID]"
       ↓
-     BOB lit spec + design_guide + ADRs → code + commits conventionnels
+     BOB lit spec + design_guide + ADRs → brief esthétique [gate] → code + commits
       ↓
 /do  "évalue feature_[ID]"
       ↓
-     DO → score /20 · conformance spec + ADRs · verdict
+     DO → score /20 · checks sécurité · conformance ADRs · verdict
+     DO → RELEASE GATE (si ≥ 14/20) : checklist pré-release + tag git + CHANGELOG draft
+      ↓
+/doc  "doc feature_[ID]"                 ← après verdict ≥ 14/20
+      ↓
+     DOC → détecte dérives doc vs code → patches CLAUDE.md/AGENTS.md/ADR_INDEX
+     DOC → génère entrée CHANGELOG finale
 ```
 
 ---
@@ -105,6 +112,7 @@ agent-stack-template/
 │       ├── jo.md                      ← /jo  — Architecte & Strategist
 │       ├── bob.md                     ← /bob  — Builder & UI/UX
 │       ├── do.md                      ← /do   — Product QA & CX
+│       ├── doc.md                     ← /doc  — Documentation Sync
 │       └── design-workflow.md         ← /design-workflow — Bridge Figma
 │
 ├── agent-system/
@@ -112,9 +120,17 @@ agent-stack-template/
 │   │   ├── client_vision.md           ← Vision, personas, JTBD [À REMPLIR]
 │   │   ├── roadmap.md                 ← Features, KPIs, backlog [À REMPLIR]
 │   │   └── design_guide.md            ← Tokens, composants, anti-patterns [À REMPLIR]
+│   ├── agents/
+│   │   ├── JO_system_prompt.md        ← System prompt JO (référence)
+│   │   ├── BOB_system_prompt.md       ← System prompt BOB (référence)
+│   │   ├── DO_system_prompt.md        ← System prompt DO (référence)
+│   │   └── DOC_system_prompt.md       ← System prompt DOC (référence)
 │   ├── adr/
 │   │   ├── ADR_INDEX.md               ← Registre des décisions actives
 │   │   └── ADR_TEMPLATE.md            ← Template pour créer un ADR
+│   ├── learnings/
+│   │   ├── LEARNINGS_INDEX.md         ← Index des patterns DO (mémoire longue)
+│   │   └── LEARNING_TEMPLATE.md       ← Template learning
 │   └── specs/
 │       └── feature_template.md        ← Template spec Gherkin + gate INVEST
 │
@@ -198,4 +214,5 @@ npm install --save-dev figma-console-mcp
 - **TypeScript strict** : les agents supposent TypeScript strict. Si ta stack diffère, adapte `bob.md` section "Qualité de Code" et crée un ADR pour documenter le choix.
 - **AGENTS.md** : met à jour la section "Sprint en cours" à chaque début de sprint — c'est la source de vérité pour les agents sur le scope actuel.
 - **ADRs** : crée ton premier ADR dès que tu fais un choix de stack ou d'architecture. JO te guide avec `/jo`.
+- **`/doc`** : à déclencher après chaque verdict DO ≥ 14/20. Si tu sautes cette étape, la documentation dérive du code au fil des features.
 - **`/design-workflow`** : nécessite le skill Bridge DS dans `.claude/skills/design-workflow/`. Copie-le depuis le projet source si utilisé.
