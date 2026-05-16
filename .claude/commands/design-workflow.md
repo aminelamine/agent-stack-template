@@ -1,15 +1,9 @@
-# /design-workflow — Bridge DS, Designer Figma
+# /design-workflow — Bridge DS, Figma Designer
 
-> ⚙️ **Ce skill nécessite une configuration.** Lis le README avant la première utilisation.
+> **Optionnel mais recommandé** pour toute feature avec une interface utilisateur significative.
+> Requiert `figma-console-mcp` connecté. Voir setup dans le README.
 
-Ce skill génère des frames Figma structurés depuis les specs JO.
-Il requiert `figma-console-mcp` connecté dans `.mcp.json` et le skill `design-workflow` installé dans `.claude/skills/design-workflow/`.
-
-## Setup requis
-
-1. Assure-toi d'avoir un token Figma valide dans `.mcp.json`
-2. Installe le skill `design-workflow` dans `.claude/skills/design-workflow/`
-3. Lance `/design-workflow setup` pour initialiser la knowledge base projet
+Ce skill génère des frames Figma structurés depuis les specs JO, et maintient la cohérence entre spec, frame et code livré.
 
 ## Usage
 
@@ -22,8 +16,22 @@ Il requiert `figma-console-mcp` connecté dans `.mcp.json` et le skill `design-w
 
 ## Quand l'utiliser
 
-Recommandé pour toute feature avec une interface utilisateur significative.
-Optionnel pour les features purement logiques ou sans composants visuels nouveaux.
+- Recommandé : toute feature avec des composants UI nouveaux ou un flow utilisateur significatif
+- Optionnel : features purement logiques, refactorings, ou features couvertes par design_guide.md existant
+
+## Setup requis
+
+```bash
+# 1. Installe le MCP
+npm install --save-dev figma-console-mcp
+
+# 2. Crée .mcp.json (ne jamais commiter — déjà dans .gitignore)
+# Remplace TON_TOKEN_FIGMA dans .mcp.json par ton vrai token
+# Figma → Settings → Personal Access Tokens
+
+# 3. Installe le skill design-workflow
+# Copie le dossier .claude/skills/design-workflow/ depuis le projet source
+```
 
 ---
 

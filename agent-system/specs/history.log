@@ -1,2 +1,5 @@
-# Design History
-# date | feature_id | name | status | author
+# Specs History
+> One line per shipped feature. Written by DO after VALIDATED verdict.
+> Format: [DATE] | [FEATURE_ID] | [Name] | [Score]/20 | [Notable pattern]
+
+# --- No entries yet — first run ---

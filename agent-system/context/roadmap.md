@@ -1,88 +1,65 @@
-# roadmap.md
-> **Usage** : Ce fichier est la source de vérité de la roadmap produit.
-> RAY le lit pour vérifier qu'une idée est dans le scope.
-> BOB le lit pour prioriser et ne pas déborder du périmètre validé.
-> **À maintenir à jour après chaque livraison ou décision de pivot.**
+# Roadmap — [PROJECT_NAME]
+> Source de vérité sur les features, les KPIs et les décisions de scope.
+> Maintenu par JO. Mis à jour par DO après chaque verdict.
 
 ---
 
-## 🎯 OKR Produit — Phase courante
+## 🏃 Sprint en cours
 
-**Objectif :** `[ex. "Lancer un MVP crédible en 4 semaines"]`
+**Sprint :** `[Nom ou numéro — ex: Sprint 1 · Setup & Foundation]`
+**Phase :** `[PLAN / DESIGN / SHIP / ANALYZE]`
+**Scope de ce sprint :**
+- `[Feature ou objectif 1]`
+- `[Feature ou objectif 2]`
 
-| Key Result | Cible | Statut |
-|---|---|---|
-| `[ex. Livrer les 5 features core]` | `5/5` | `0/5` |
-| `[ex. Score ANALYZER moyen > 15/20]` | `> 15/20` | `—` |
-| `[KR 3]` | `[Cible]` | `[Statut]` |
+**Hors scope ce sprint (explicitement) :**
+- `[Ce qui ne sera pas touché]`
+
+**Définition of Done :** `[Ce qui doit être vrai pour clore ce sprint]`
 
 ---
 
-## 📋 Backlog Features
+## 🎯 KPIs & métriques de succès
 
-### 🔵 Phase 0 — Foundation *(setup, pas de valeur utilisateur directe)*
-
-| ID | Feature | Statut | Score |
+| KPI | Baseline | Cible | Méthode de mesure |
 |---|---|---|---|
-| F-000 | `[ex. Setup Next.js + Tailwind + Shadcn]` | `[ ] TODO / [x] ✅ LIVRÉE` | `—` |
+| `[ex: Taux de conversion]` | `[—]` | `[+X%]` | `[Google Analytics / …]` |
+| `[ex: Time to first action]` | `[—]` | `[< Xs]` | `[Session recording]` |
 
 ---
 
-### 🟢 Phase 1 — MVP Core *(valeur minimale livrable)*
+## 📦 Features
 
-| ID | Feature | Statut | Score ANALYZER |
+### Phase 1 — MVP
+
+| ID | Feature | Statut | Score DO | Notes |
+|---|---|---|---|---|
+| F-001 | `[Nom]` | `📋 BACKLOG` | — | `[—]` |
+| F-002 | `[Nom]` | `📋 BACKLOG` | — | `[—]` |
+
+**Statuts :** 📋 BACKLOG · 🔄 EN COURS · 👀 EN REVIEW · ✅ LIVRÉE [X]/20 · ❌ DROPPED
+
+### Phase 2 — Post-MVP *(à affiner)*
+
+| ID | Feature | Priorité | Notes |
 |---|---|---|---|
-| F-001 | `[Nom feature 1]` | `[ ] TODO` | `—` |
-| F-002 | `[Nom feature 2]` | `[ ] TODO` | `—` |
-| F-003 | `[Nom feature 3]` | `[ ] TODO` | `—` |
-
-**Barre de progression Phase 1 :** `░░░░░░░░░░ 0%`
+| F-010 | `[Nom]` | `HIGH` | `[—]` |
 
 ---
 
-### 🟡 Phase 2 — Enrichissement *(après validation MVP)*
+## 🚫 Out of scope (toutes phases)
 
-| ID | Feature | Statut |
+> Ce que le produit ne fera délibérément PAS, avec la raison.
+
+- `[Non-feature 1]` — *Raison : [ex. complexité vs. valeur, hors périmètre MVP]*
+- `[Non-feature 2]` — *Raison : [ex. à évaluer en Phase 2]*
+
+---
+
+## 📝 Décisions de scope
+
+> Choix structurants validés par Le Talent. JO consulte cette section avant de spécer.
+
+| Date | Décision | Raison |
 |---|---|---|
-| F-010 | `[Nom feature]` | `[ ] BACKLOG` |
-| F-011 | `[Nom feature]` | `[ ] BACKLOG` |
-
----
-
-### 🔴 LATER / Out of Scope pour l'instant
-
-> Ces features ne seront pas spécées ni développées avant validation explicite du Talent.
-
-- `[ex. Mode sombre]`
-- `[ex. Internationalisation (i18n)]`
-- `[ex. Export PDF]`
-
----
-
-## 📐 Détail des features actives
-
-> Rempli par RAY au moment de la spec. Une ligne par feature en cours ou terminée.
-
-### F-001 — [Nom]
-- **Statut :** `DRAFT / VALIDÉE TALENT / EN DEV / EN REVIEW / LIVRÉE`
-- **Spec :** `agent-system/specs/feature_001_[nom].md`
-- **Score ANALYZER :** `—`
-- **Notes :** `[À remplir]`
-
----
-
-## ✅ Definition of Done
-
-Une feature est considérée LIVRÉE quand :
-1. Spec statut `VALIDÉE TALENT`
-2. BOB a livré + auto-vérifié les critères d'acceptation
-3. ANALYZER a rendu un verdict ≥ 14/20
-4. Ce fichier est mis à jour
-
----
-
-## 📝 Changelog
-
-| Date | Événement |
-|---|---|
-| `[YYYY-MM-DD]` | Initialisation du projet |
+| `[YYYY-MM-DD]` | `[ex: Pas d'auth multi-tenant en MVP]` | `[ex: Complexité disproportionnée au nombre d'utilisateurs Phase 1]` |

@@ -1,218 +1,232 @@
-# agent-stack-template
+# ⬡ AgentStack — Stack Officielle Product Designer
 
-> Système multi-agents **JO / BOB / DO / DOC** pour Claude Code.
-> Workflow **PLAN → DESIGN → SHIP → ANALYZE → MAINTAIN**, avec système ADR intégré et intégration Figma optionnelle.
-
----
-
-## ⚡ Quick Start — Une commande
-
-```bash
-# 1. Clone le template dans ton dossier projet
-gh repo clone aminelamine/agent-stack-template mon-projet -- --depth=1
-cd mon-projet
-
-# 2. Lance le wizard de setup
-bash setup.sh
-```
-
-Le wizard configure automatiquement CLAUDE.md et AGENTS.md avec les infos de ton projet,
-initialise Next.js 15 + Shadcn/ui si souhaité, et crée le repo git initial.
-
-> **Sans GitHub CLI ?** → Voir [Installation manuelle](#installation-manuelle) plus bas.
+> Système multi-agents **JO · BOB · DO** pour Claude Code.
+> Architecture **OS-light · Skills-first** — optimisée pour les product designers qui buildent avec l'IA.
 
 ---
 
-## 🧠 Ce que ce template contient
+## Pourquoi cette stack
 
-Ce n'est pas un simple boilerplate. C'est un système d'orchestration d'agents avec une mémoire structurée :
+La plupart des setups Claude Code font deux erreurs : ils surchargent `CLAUDE.md` (l'équivalent de la RAM permanente) et ils mélangent la logique des agents avec la configuration projet. Résultat : ~1 400 tokens chargés à chaque tour, des agents qui se contredisent entre sessions, et une documentation qui dérive du code au bout de 3 features.
 
-| Composant | Rôle |
-|---|---|
-| **CLAUDE.md** | Bootstrap automatique — chargé par Claude Code à chaque session |
-| **AGENTS.md** | Contraintes opérationnelles du sprint : versions d'outils, limites d'autonomie par agent, conventions de commit |
-| **agent-system/context/** | Mémoire partagée — vision client, roadmap, design guide |
-| **agent-system/adr/** | Architecture Decision Records — mémoire longue des décisions structurantes |
-| **agent-system/specs/** | Specs vivantes générées par JO, consommées par BOB |
-| **.claude/commands/** | Slash commands pour activer chaque agent |
+Cette stack résout ça avec une thèse simple : `CLAUDE.md` est l'OS. Les agents sont des apps chargées à la demande. Les specs sont la source de vérité. Les learnings sont la mémoire longue.
+
+| | Setup classique | AgentStack |
+|---|---|---|
+| `CLAUDE.md` | ~1 400 tokens par tour | ~150 tokens — OS uniquement |
+| Logique agents | Dans l'OS (dupliquée) | Dans system prompts, chargés à la demande |
+| Mémoire longue | Inexistante | DO écrit les learnings · JO les lit |
+| Brief esthétique | Optionnel, souvent sauté | Gate obligatoire avant tout code |
+| Décisions archi | Perdues entre sessions | ADR system intégré |
+| Économie (20 tours) | — | ~25 000 tokens |
 
 ---
 
-## 🤖 Les agents
+## Les agents
 
 | Slash command | Agent | Phase | Mission |
 |---|---|---|---|
-| `/jo` | **JO** — Architecte & Strategist | PLAN | Challenge les idées, génère les specs, crée les ADRs |
+| `/jo` | **JO** — Architecte & Strategist | PLAN | Challenge les idées · génère les specs · crée les ADRs |
+| `/bob` | **BOB** — Builder & UI/UX | SHIP | Brief esthétique (gate) · implémente · commite |
+| `/do` | **DO** — Product QA & CX | ANALYZE | Score /20 · verdict VALIDÉ/REJETÉ · écrit les learnings |
 | `/design-workflow` | **Bridge DS** — Designer Figma | DESIGN | Génère des frames Figma depuis une spec JO *(optionnel)* |
-| `/bob` | **BOB** — Builder & UI/UX | SHIP | Implémente les specs en code, commite avec conventions |
-| `/do` | **DO** — Product QA & CX | ANALYZE | Score /20, verdict VALIDÉ/REJETÉ, checks sécurité, RELEASE gate |
-| `/doc` | **DOC** — Documentation Sync | MAINTAIN | Syncs CLAUDE.md/AGENTS.md/ADRs avec le code, génère le CHANGELOG |
 
 ---
 
-## 🔄 Workflow
+## Workflow
 
 ```
 /jo  "j'ai une idée : [description]"
       ↓
-     JO challenge → génère specs/feature_[ID].md
+     JO challenge → génère specs/active/feature_[ID].md
+     statut: VALIDÉE TALENT requis pour débloquer BOB
       ↓
-/design-workflow  "spec feature_[ID]"    ← optionnel
+/design-workflow  "spec feature_[ID]"    ← optionnel, recommandé pour features visuelles
       ↓
      Bridge DS → frame Figma
       ↓
 /bob  "implémente feature_[ID]"
       ↓
-     BOB lit spec + design_guide + ADRs → brief esthétique [gate] → code + commits
+     BOB lit spec + design_guide + ADRs
+      ↓
+     [BRIEF ESTHÉTIQUE — gate obligatoire]
+     ⏸ BOB s'arrête et attend ta validation
+     "ok" ou ajustements → BOB code
+      ↓
+     Ralph Loop : Structure → Scaffold → Logic → UI → États → Polish
       ↓
 /do  "évalue feature_[ID]"
       ↓
-     DO → score /20 · checks sécurité · conformance ADRs · verdict
-     DO → RELEASE GATE (si ≥ 14/20) : checklist pré-release + tag git + CHANGELOG draft
+     DO → score /20 · conformance spec + ADRs · verdict
       ↓
-/doc  "doc feature_[ID]"                 ← après verdict ≥ 14/20
+     Learnings écrits dans agent-system/learnings/feature_[ID]_learnings.md
       ↓
-     DOC → détecte dérives doc vs code → patches CLAUDE.md/AGENTS.md/ADR_INDEX
-     DOC → génère entrée CHANGELOG finale
+     JO lit ces learnings avant la prochaine spec → le système s'améliore
 ```
 
 ---
 
-## 📐 Système ADR — Mémoire longue des décisions
+## Quick Start
 
-Le répertoire `agent-system/adr/` contient les **Architecture Decision Records** du projet.
-C'est le mécanisme qui empêche BOB de contredire en session 5 une décision prise en session 1.
+```bash
+# Option A — GitHub CLI (recommandé)
+gh repo clone aminelamine/agent-stack mon-projet -- --depth=1
+cd mon-projet
+bash setup.sh
 
+# Option B — degit (sans historique git)
+npx degit aminelamine/agent-stack mon-projet
+cd mon-projet
+bash setup.sh
+
+# Option C — GitHub Template
+# "Use this template" → créer ton repo → git clone → bash setup.sh
 ```
-agent-system/adr/
-├── ADR_INDEX.md        ← Registre — lu par tous les agents en début de session
-├── ADR_TEMPLATE.md     ← Template à copier pour chaque nouvelle décision
-└── adr-001-*.md        ← Décisions actives (créées par JO, validées par Le Talent)
-```
 
-**Quand créer un ADR :**
-- Introduction d'une nouvelle dépendance majeure
-- Choix de paradigme ou pattern architectural
-- Décision de scope avec impact multi-features
-- Tout choix structurant dont le *pourquoi* ne doit pas se perdre
+Le wizard `setup.sh` configure CLAUDE.md avec le nom et la description de ton projet, installe les dépendances pnpm, et initialise le repo git.
 
 ---
 
-## 📁 Structure complète
+## Structure
 
 ```
-agent-stack-template/
+agent-stack/
 │
-├── CLAUDE.md                          ← Bootstrap — chargé automatiquement
-├── AGENTS.md                          ← Contraintes sprint : versions, autonomie, commits
-├── setup.sh                           ← Wizard d'installation one-command
+├── CLAUDE.md                              ← OS — ~150 tokens, toujours en RAM
+├── setup.sh                               ← Wizard d'installation one-command
+├── .mcp.json                              ← Config Figma MCP (token à configurer, ne pas commiter)
 │
 ├── .claude/
-│   └── commands/
-│       ├── jo.md                      ← /jo  — Architecte & Strategist
-│       ├── bob.md                     ← /bob  — Builder & UI/UX
-│       ├── do.md                      ← /do   — Product QA & CX
-│       ├── doc.md                     ← /doc  — Documentation Sync
-│       └── design-workflow.md         ← /design-workflow — Bridge Figma
+│   ├── commands/
+│   │   ├── jo.md                          ← /jo  — charge JO_system_prompt.md
+│   │   ├── bob.md                         ← /bob — charge BOB_system_prompt.md
+│   │   ├── do.md                          ← /do  — charge DO_system_prompt.md
+│   │   └── design-workflow.md             ← /design-workflow — Bridge Figma (optionnel)
+│   └── skills/
+│       └── frontend-design/
+│           └── SKILL.md                   ← Brief esthétique BOB (gate non négociable)
 │
-├── agent-system/
-│   ├── context/
-│   │   ├── client_vision.md           ← Vision, personas, JTBD [À REMPLIR]
-│   │   ├── roadmap.md                 ← Features, KPIs, backlog [À REMPLIR]
-│   │   └── design_guide.md            ← Tokens, composants, anti-patterns [À REMPLIR]
-│   ├── agents/
-│   │   ├── JO_system_prompt.md        ← System prompt JO (référence)
-│   │   ├── BOB_system_prompt.md       ← System prompt BOB (référence)
-│   │   ├── DO_system_prompt.md        ← System prompt DO (référence)
-│   │   └── DOC_system_prompt.md       ← System prompt DOC (référence)
-│   ├── adr/
-│   │   ├── ADR_INDEX.md               ← Registre des décisions actives
-│   │   └── ADR_TEMPLATE.md            ← Template pour créer un ADR
-│   ├── learnings/
-│   │   ├── LEARNINGS_INDEX.md         ← Index des patterns DO (mémoire longue)
-│   │   └── LEARNING_TEMPLATE.md       ← Template learning
-│   └── specs/
-│       └── feature_template.md        ← Template spec Gherkin + gate INVEST
-│
-└── .mcp.json                          ← Config Figma MCP [TOKEN À CONFIGURER]
+└── agent-system/
+    ├── agents/
+    │   ├── JO_system_prompt.md            ← Chargé par /jo à la demande
+    │   ├── BOB_system_prompt.md           ← Chargé par /bob à la demande
+    │   └── DO_system_prompt.md            ← Chargé par /do à la demande
+    ├── context/
+    │   ├── client_vision.md               ← [À REMPLIR] Vision, JTBD, contraintes
+    │   ├── roadmap.md                     ← [À REMPLIR] Features, KPIs, sprint en cours
+    │   └── design_guide.md               ← [À REMPLIR] Tokens, composants, anti-patterns
+    ├── adr/
+    │   ├── ADR_INDEX.md                   ← Registre des décisions actives (lu par tous)
+    │   └── ADR_TEMPLATE.md               ← Template à copier pour chaque décision
+    ├── learnings/
+    │   ├── LEARNINGS_INDEX.md             ← Index des learnings DO (lu par JO)
+    │   └── LEARNING_TEMPLATE.md           ← Template DO pour écrire les learnings
+    ├── specs/
+    │   ├── active/                        ← Spec en cours (0–1 à la fois)
+    │   ├── backlog/
+    │   ├── shipped/
+    │   ├── dropped/
+    │   └── feature_template.md            ← Template spec Gherkin + gate INVEST
+    ├── resources/
+    │   └── visual_reference.md            ← 15 pairings typo + 9 palettes
+    └── sessions/                          ← Checkpoints BOB (exclu du git)
 ```
 
 ---
 
-## 🔑 Générique vs. projet-spécifique
+## Principes d'architecture
+
+### OS-light
+`CLAUDE.md` ne contient que les contraintes invariantes (~150 tokens). Tout le reste — logique agents, workflows, esthétique — est dans des fichiers chargés à la demande. Le contexte d'une session de 20 tours économise ~25 000 tokens vs un setup classique.
+
+### Séparation OS / Apps
+Les commandes slash (`.claude/commands/`) sont de simples loaders : elles chargent le system prompt de l'agent concerné (`agent-system/agents/`). La logique vit dans les system prompts, pas dans l'OS.
+
+### Mémoire longue via learnings
+DO écrit un fichier de learnings après chaque évaluation. JO lit les 3 plus récents avant de générer chaque spec. Les ambiguïtés récurrentes, les anti-patterns détectés et les signaux CX remontent automatiquement dans les prochaines specs — sans intervention manuelle.
+
+### ADR System
+Les Architecture Decision Records (`agent-system/adr/`) empêchent BOB de contredire en session 5 une décision prise en session 1. JO crée un ADR pour toute décision structurante. DO le vérifie à chaque évaluation.
+
+### BOB Gate
+BOB ne code jamais sans un brief esthétique validé. Ce gate prend 2 minutes et évite 30 à 60 minutes de rework. Il est non négociable — BOB refusera si tu essaies de le sauter.
+
+---
+
+## Configuration post-clone
+
+### 1. Remplis les 3 fichiers de contexte (priorité absolue)
+
+**`agent-system/context/client_vision.md`**
+→ Vision produit, personas, JTBD, contraintes connues. JO refuse de spécer sans ce fichier.
+
+**`agent-system/context/roadmap.md`**
+→ Features in/out-of-scope, KPIs, sprint en cours. Remplace AGENTS.md — c'est ici que tu définis le scope de chaque sprint.
+
+**`agent-system/context/design_guide.md`**
+→ Direction esthétique, tokens CSS, composants Shadcn autorisés, anti-patterns visuels. BOB et DO lisent ce fichier à chaque session.
+
+### 2. Figma MCP (optionnel)
+
+```bash
+npm install --save-dev figma-console-mcp
+```
+
+Crée `.mcp.json` (déjà dans `.gitignore`, ne jamais commiter) :
+```json
+{
+  "mcpServers": {
+    "figma-console": {
+      "command": "node",
+      "args": ["./node_modules/figma-console-mcp/dist/local.js"],
+      "env": {
+        "FIGMA_ACCESS_TOKEN": "TON_TOKEN_ICI",
+        "ENABLE_MCP_APPS": "true"
+      }
+    }
+  }
+}
+```
+
+Ensuite installe le skill `design-workflow` dans `.claude/skills/design-workflow/` et utilise `/design-workflow` entre JO et BOB.
+
+### 3. Adapte la stack si nécessaire
+
+Ce template suppose **Next.js · TypeScript strict · Tailwind · Shadcn/ui · Lucide React**.
+Si ta stack diffère :
+- Mets à jour la ligne `Stack →` dans `CLAUDE.md`
+- Mets à jour la section "Code Quality" dans `BOB_system_prompt.md`
+- Crée un ADR pour documenter le choix (`/jo` te guide)
+
+---
+
+## Générique vs. projet-spécifique
 
 | Fichier | Générique | Projet-spécifique |
 |---|---|---|
-| `CLAUDE.md` | Structure | Nom, stack, description |
-| `AGENTS.md` | Structure + règles agents | Versions d'outils, sprint en cours |
+| `CLAUDE.md` | Structure | Nom du projet, stack si différente |
 | `.claude/commands/*.md` | ✅ Tout | Rien |
+| `.claude/skills/frontend-design/SKILL.md` | ✅ Tout | Rien |
+| `agent-system/agents/*.md` | ✅ Tout | Rien |
 | `client_vision.md` | Structure | Tout le contenu |
-| `roadmap.md` | Structure | Tout le contenu |
+| `roadmap.md` | Structure | Contenu + sprint en cours |
 | `design_guide.md` | Structure | Tokens, stack UI, décisions |
+| `visual_reference.md` | 15 pairings + 9 palettes | Tes ajouts custom |
 | `adr/ADR_INDEX.md` | Structure | Décisions du projet |
 | `adr/ADR_TEMPLATE.md` | ✅ Tout | Rien |
 | `feature_template.md` | ✅ Tout | Rien |
-| `.mcp.json` | Structure | Token Figma |
+| `LEARNING_TEMPLATE.md` | ✅ Tout | Rien |
 
 ---
 
-## 🛠️ Installation manuelle
+## Notes importantes
 
-Si tu ne peux pas utiliser GitHub CLI :
-
-**Option A — GitHub Template**
-1. Sur GitHub : Settings → ✓ Template repository
-2. "Use this template" → créer un nouveau repo
-3. `git clone [url-nouveau-repo] && cd [repo] && bash setup.sh`
-
-**Option B — degit (sans historique git)**
-```bash
-npx degit aminelamine/agent-stack-template mon-projet
-cd mon-projet
-bash setup.sh
-```
-
-**Option C — Copie manuelle**
-```bash
-cp -r agent-stack-template/ mon-projet/
-cd mon-projet/
-rm -rf .git
-bash setup.sh
-```
+- **Premier run** : JO demandera que `client_vision.md` et `roadmap.md` soient remplis avant de générer quoi que ce soit. C'est voulu.
+- **Le BOB gate est non négociable** : si tu dis "skip le brief", BOB refusera.
+- **Les learnings s'accumulent** : plus tu utilises le système, plus JO anticipe les problèmes de spec.
+- **`sessions/`** est exclu du git — éphémère par design. DO archive les learnings, pas les sessions.
+- **`roadmap.md#Sprint en cours`** remplace AGENTS.md — c'est là que tu définis le scope, les priorités et les contraintes de chaque sprint.
 
 ---
 
-## ⚙️ Configuration post-setup
-
-### Fichiers à remplir manuellement (non gérés par le wizard)
-
-**`agent-system/context/client_vision.md`**
-→ Vision produit, personas, JTBD, contraintes, métriques de succès
-
-**`agent-system/context/roadmap.md`**
-→ Features Phase 1, KPIs, out-of-scope
-
-**`agent-system/context/design_guide.md`**
-→ Philosophie UI, stack, tokens CSS, composants validés, anti-patterns
-
-### Figma MCP (optionnel)
-
-```bash
-# Installe le MCP
-npm install --save-dev figma-console-mcp
-
-# Dans .mcp.json : remplace VOTRE_TOKEN_FIGMA_ICI
-# Figma Settings → Personal Access Tokens → Créer un token
-```
-
-> ⚠️ Ajoute `.mcp.json` à ton `.gitignore` — ne commite jamais un vrai token.
-
----
-
-## ⚠️ Notes importantes
-
-- **TypeScript strict** : les agents supposent TypeScript strict. Si ta stack diffère, adapte `bob.md` section "Qualité de Code" et crée un ADR pour documenter le choix.
-- **AGENTS.md** : met à jour la section "Sprint en cours" à chaque début de sprint — c'est la source de vérité pour les agents sur le scope actuel.
-- **ADRs** : crée ton premier ADR dès que tu fais un choix de stack ou d'architecture. JO te guide avec `/jo`.
-- **`/doc`** : à déclencher après chaque verdict DO ≥ 14/20. Si tu sautes cette étape, la documentation dérive du code au fil des features.
-- **`/design-workflow`** : nécessite le skill Bridge DS dans `.claude/skills/design-workflow/`. Copie-le depuis le projet source si utilisé.
+*Conçu et validé par [@aminelamine](https://linkedin.com/in/lamine-amine) — Product Designer, AI workflows.*

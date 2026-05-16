@@ -109,13 +109,10 @@ if [[ -f "$TARGET_DIR/CLAUDE.md" ]]; then
   echo -e "  ${GREEN}✓${RESET} CLAUDE.md"
 fi
 
-if [[ -f "$TARGET_DIR/AGENTS.md" ]]; then
-  _sed "s|\[Nom ou numéro du sprint\]|Sprint 1 — Setup|g" "$TARGET_DIR/AGENTS.md"
-  _sed "s|\[PLAN / DESIGN / SHIP / ANALYZE\]|PLAN|g" "$TARGET_DIR/AGENTS.md"
-  _sed "s|\[feature_XXX → feature_YYY\]|—|g" "$TARGET_DIR/AGENTS.md"
-  _sed "s|\[— ou description\]|—|g" "$TARGET_DIR/AGENTS.md"
-  _sed "s|\[Description\]|Première spec validée|g" "$TARGET_DIR/AGENTS.md"
-  echo -e "  ${GREEN}✓${RESET} AGENTS.md"
+if [[ -f "$TARGET_DIR/agent-system/context/roadmap.md" ]]; then
+  _sed "s|\[Nom ou numéro du sprint — ex: Sprint 1 · Setup & Foundation\]|Sprint 1 — Setup|g" "$TARGET_DIR/agent-system/context/roadmap.md"
+  _sed "s|\[PLAN / DESIGN / SHIP / ANALYZE\]|PLAN|g" "$TARGET_DIR/agent-system/context/roadmap.md"
+  echo -e "  ${GREEN}✓${RESET} roadmap.md (sprint initialisé)"
 fi
 echo ""
 

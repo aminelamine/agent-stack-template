@@ -1,26 +1,21 @@
-# Env & secrets
-.env
-.env.local
-.env.*.local
-
-# MCP config avec token réel — ne jamais commiter
-# Commite le fichier uniquement avec le placeholder "VOTRE_TOKEN_FIGMA_ICI"
-# .mcp.json  ← décommente si tu veux ignorer complètement
-
-# Node
+# Dependencies
 node_modules/
-.npm
-
-# Next.js (si utilisé dans le projet final)
 .next/
-out/
-build/
+
+# Environment
+.env*.local
+.env
+
+# MCP config (never commit tokens)
+.mcp.json
+
+# Sessions (ephemeral BOB checkpoints)
+agent-system/sessions/
+
+# Logs
+*.log
+npm-debug.log*
 
 # OS
 .DS_Store
 Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-*.swp

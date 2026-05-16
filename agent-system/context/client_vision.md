@@ -1,124 +1,60 @@
-# client_vision.md
-> **Usage** : Ce fichier définit la vision stratégique du produit, les personas, les JTBD et les contraintes.
-> RAY le lit pour challenger les idées et cadrer les specs.
-> ANALYZER le lit pour évaluer si la feature livrée sert réellement l'utilisateur.
-> **À remplir avant la première session avec /ray.**
+# Client Vision
+> Read by JO before every spec · Read by DO during user simulation
+> **Fill this file before running any agent.**
 
 ---
 
-## 🎯 Vision produit
+## Product summary
 
-### En une phrase
-> Quelle transformation ce produit apporte-t-il ? Format : "[Pour qui], [notre produit] permet de [résultat], contrairement à [alternative actuelle]."
+> 2–3 sentences. What is this product? For whom? What problem does it solve?
 
-`[À COMPLÉTER]`
-
-### Le problème qu'on résout
-> Décris le problème en 2-3 phrases. Pas la solution — le problème douloureux que l'utilisateur ressent.
-
-`[À COMPLÉTER]`
-
-### Ce que le produit n'est PAS
-> Anti-vision : qu'est-ce que ce produit refuse explicitement d'être ?
-
-- `[À COMPLÉTER]`
-- `[À COMPLÉTER]`
+`[TO FILL]`
 
 ---
 
-## 👤 Personas
+## Jobs To Be Done
 
-### Persona 1 — [Nom / Archétype]
+> The 2–4 core JTBD this product addresses.
+> Format: "When [situation], the user wants [motivation], to [expected outcome]."
 
-**Profil**
-- Rôle : `[ex. Product Manager, Recruteur, Designer Senior]`
-- Contexte : `[Où est-il ? Quel est son environnement de travail ?]`
-- Maturité produit : `[Débutant / Intermédiaire / Expert]`
-
-**JTBD**
-*"Quand [situation déclenchante], je veux [motivation profonde], pour [résultat attendu]."*
-
-`[À COMPLÉTER]`
-
-**Frustrations actuelles**
-- `[Frustration 1]`
-- `[Frustration 2]`
-
-**Définition du succès pour ce persona**
-> Comment sait-on que ce persona a réussi grâce au produit ?
-`[À COMPLÉTER]`
+- JTBD 1: `[TO FILL]`
+- JTBD 2: `[TO FILL]`
+- JTBD 3: `[TO FILL]`
 
 ---
 
-### Persona 2 — [Nom / Archétype]
+## Product values
 
-**Profil**
-- Rôle : `[À COMPLÉTER]`
-- Contexte : `[À COMPLÉTER]`
-- Maturité produit : `[À COMPLÉTER]`
+> 3–5 words or principles that define the product's identity.
+> These inform aesthetic direction and UX decisions.
 
-**JTBD**
-`[À COMPLÉTER]`
-
-**Frustrations actuelles**
-- `[À COMPLÉTER]`
-
-**Définition du succès**
-`[À COMPLÉTER]`
+- `[TO FILL]` — e.g. "Speed over completeness"
+- `[TO FILL]` — e.g. "Honest, no dark patterns"
+- `[TO FILL]`
 
 ---
 
-### Persona 3 — [Nom / Archétype] *(optionnel)*
+## Anti-patterns (explicit)
 
-**Profil**
-- Rôle : `[À COMPLÉTER]`
+> Behaviors, aesthetics, or patterns explicitly forbidden for this product.
+> JO flags any spec that contradicts these. DO deducts points for violations.
 
-**JTBD**
-`[À COMPLÉTER]`
-
----
-
-## 🧭 Principes de design du produit
-
-> Ces principes guident les arbitrages quand deux choix se valent techniquement.
-> RAY les utilise pour trancher en mode ARBITRAGE.
-
-1. `[Principe 1 — ex. "La clarté prime sur la richesse fonctionnelle"]`
-2. `[Principe 2 — ex. "L'utilisateur avancé ne doit jamais ralentir pour l'utilisateur débutant"]`
-3. `[Principe 3]`
+- `[TO FILL]` — e.g. "No modal overload"
+- `[TO FILL]` — e.g. "No gamification / engagement tricks"
+- `[TO FILL]`
 
 ---
 
-## ⚠️ Contraintes & Context
+## Target users
 
-### Contraintes techniques
-- `[ex. "Pas de base de données en MVP — localStorage ou fichiers statiques"]`
-- `[ex. "Budget d'infrastructure : 0€/mois en phase 0"]`
+> Who uses this product? What's their context, level of expertise, constraints?
 
-### Contraintes business
-- `[ex. "MVP à livrer en 3 semaines"]`
-- `[ex. "Pas de dépendance à des APIs payantes sans validation"]`
-
-### Contraintes UX
-- `[ex. "L'interface doit fonctionner sans JavaScript activé pour les fonctions de base"]`
-- `[ex. "Support minimum : Chrome 2 dernières versions, Safari iOS 16+"]`
+`[TO FILL]`
 
 ---
 
-## 📊 Métriques de succès produit
+## Known constraints
 
-> Comment mesure-t-on que le produit atteint ses objectifs ?
+> Technical, legal, organizational, or timeline constraints JO must respect.
 
-| Métrique | Baseline | Cible | Horizon |
-|---|---|---|---|
-| `[ex. Taux de conversion visiteur → contact]` | `[0%]` | `[ex. 5%]` | `[3 mois]` |
-| `[ex. Temps passé sur la page projet]` | `[?]` | `[ex. > 2min]` | `[3 mois]` |
-| `[Métrique 3]` | `[À mesurer]` | `[Cible]` | `[Horizon]` |
-
----
-
-## 📝 Historique des décisions stratégiques
-
-| Date | Décision | Raison |
-|---|---|---|
-| `[YYYY-MM-DD]` | Création du document | Initialisation du projet |
+- `[TO FILL]`
